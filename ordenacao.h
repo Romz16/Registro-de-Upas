@@ -1,24 +1,27 @@
 
-//Emergência, Urgência e Sem Urgência e o total de médicos plantonistas.
+# ifndef ordenacao_h
+# define ordenacao_h
 
-struct situacao
+
+typedef struct 
 {
     int Emergencia;
     int Urgencia;
     int SemUrgencia;
     int QntPlantonistas;    
-} typedef TADsituacao;
+} TADsituacao;
 
-struct  ordenacao
+ typedef struct  
 {
     char nome[20];
     TADsituacao Upa;
 
-}typedef TADupa;
+}TADupa;
 
+void preencheVetor(TADupa *vetorUpas, int n);
+void selectionsort (TADupa *vet, int tam);
+TADupa *desalocaUpas(TADupa *upas);
+TADupa *alocaUpas(TADupa *upas, int n);
+void imprimeResultado(TADupa *vetorUpas, int n);
 
-TADupa *lerDados(int quantidade);
-void OrdemAlfabetica(TADupa *vetorUpas,int posi1,int posi2);
-void OrdemNumerica(TADupa *vetorUpas,int posi1,int posi2);
-
-void libera(TADupa *x);
+# endif
