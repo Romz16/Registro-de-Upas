@@ -1,58 +1,81 @@
+
 #include<stdio.h>
 #include<string.h>
 #include<stdlib.h>
 #include"ordenacao.h"
 
-TADupa *lerDados(int quantidade){
-    int i,j;
-    TADupa *vetorUpas;
-    vetorUpas = malloc(quantidade* sizeof(TADupa));
-    for ( i = 0; i < quantidade; i++)
-    {
-        scanf("%s",&vetorUpas[i].nome);
-        scanf("%d",&vetorUpas[i].Upa.Emergencia);
-        scanf("%d",&vetorUpas[i].Upa.Urgencia);
-        scanf("%d",&vetorUpas[i].Upa.SemUrgencia);
-        scanf("%d",&vetorUpas[i].Upa.QntPlantonistas);
+TADupa *alocaUpas(TADupa *upas, int n){
+	
+   upas = malloc(n*sizeof(TADupa));//preencher
+   return upas;
+}
+
+TADupa *desalocaUpas(TADupa *upas){
+  free(upas);
+  return upas;
+}
+
+void preencheVetor(TADupa *upas, int n){
+    for(int i = 0; i < n; i++){
+        scanf("%s",upas[i].nome);
+        scanf("%d %d %d %d", &upas[i].Upa.Emergencia, &upas[i].Upa.Urgencia, &upas[i].Upa.SemUrgencia, &upas[i].Upa.QntPlantonistas);
     }
-    return vetorUpas;
+
+	for(int i = 0; i < n; i++){
+       
+
+		printf(" %s ",upas[i].nome);
+
+        printf("\n %d %d %d %d \n", upas[i].Upa.Emergencia, upas[i].Upa.Urgencia, upas[i].Upa.SemUrgencia, upas[i].Upa.QntPlantonistas);
+    }
 }
 
-void libera(TADupa *vetorUpas){
-    free(vetorUpas);
-}
 
-void OrdemAlfabetica(TADupa *vetorUpas,int posi1,int posi2){
-     int r;
-     TADupa aux;
-     r = strcmp(vetorUpas[posi1].nome,vetorUpas[posi2].nome);
-     if (r>0)
-     {
-        aux = vetorUpas[posi1];
-        vetorUpas[posi1] = vetorUpas[posi2];
-        vetorUpas[posi2 ]= aux;
-     }    
-}
 
-void OrdemNumerica(TADupa *vetorUpas,int posi1,int posi2){
+
+void selectionsort (TADupa *vet, int tam){
+    int i, j, max;
     TADupa aux;
-     if (vetorUpas[posi1].Upa.Emergencia<vetorUpas[posi2].Upa.Emergencia)
-     {
-        aux = vetorUpas[posi1];
-        vetorUpas[posi1] = vetorUpas[posi2];
-        vetorUpas[posi2 ]= aux;
-     }    
-     else if (vetorUpas[posi1].Upa.Emergencia==vetorUpas[posi2].Upa.Emergencia||vetorUpas[posi1].Upa.Urgencia<vetorUpas[posi2].Upa.Urgencia)
-     {
-        aux = vetorUpas[posi1];
-        vetorUpas[posi1] = vetorUpas[posi2];
-        vetorUpas[posi2 ]= aux;
-     }
+    for (i=0; i<=tam-1; i++){
+        max = i;
+	for (j=i+1; j<=tam; j++){
+            if (vet[j].Upa.Emergencia > vet[max].Upa.Emergencia)
+	        max = j;
+            else if (vet[j].Upa.Emergencia == vet[max].Upa.Emergencia)
+            {
+                if (vet[j].Upa.Urgencia > vet[max].Upa.Urgencia)
+                {
+                    max = j;
+                }
+                 else if (vet[j].Upa.Urgencia == vet[max].Upa.Urgencia)
+                 {
+                    if (vet[j].Upa.SemUrgencia > vet[max].Upa.SemUrgencia)
+                    {
+                     max = j;
+                    }
+                    else if(vet[j].Upa.SemUrgencia == vet[max].Upa.SemUrgencia)
+                    {
 
-    else if (vetorUpas[posi1].Upa.Emergencia==vetorUpas[posi2].Upa.Emergencia||vetorUpas[posi1].Upa.Urgencia==vetorUpas[posi2].Upa.Urgencia||vetorUpas[posi1].Upa.SemUrgencia<vetorUpas[posi2].Upa.SemUrgencia)
-    
-        aux = vetorUpas[posi1];
-        vetorUpas[posi1] = vetorUpas[posi2];
-        vetorUpas[posi2 ]= aux;
+                         if(strcmp(vet[max].nome,vet[j].nome )>0){
+                             max = j;
+                         }
+                        
+                    }
+                }
+                
+            }
+            
+	}
+	aux = vet[max];
+	vet[max] = vet[i];
+	vet[i] = aux;
+    }
 }
 
+
+void imprimeResultado(TADupa *upas, int n){
+    printf("\n\n");
+    for (int i = 0; i < n; i++){
+        printf("%s %d %d %d %d\n", upas[i].nome, upas[i].Upa.Emergencia, upas[i].Upa.Urgencia, upas[i].Upa.SemUrgencia, upas[i].Upa.QntPlantonistas);
+    }
+}
