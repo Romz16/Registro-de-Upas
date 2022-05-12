@@ -1,17 +1,24 @@
-#include<stdio.h>
-#include<string.h>
+#include "ordenacao.h"
+#include <stdio.h>
 #include<stdlib.h>
-#include"ordenacao.h"
 
-int main(){
-    int quantidade;
-    TADupa *vetorUpa;
-    scanf("%d",quantidade);
-    vetorUpa = lerDados(quantidade);
-    libera(vetorUpa);
+int main ()
+{
+	
+	int n;
+	TADupa *vetorupas = NULL;
 
-    return 0;
+	//ler as quantidades
+	scanf("%d",&n);
+	//alocar o vetor
+	vetorupas = alocaUpas(vetorupas,n);
+	//preencher o vetor
+	preencheVetor(vetorupas, n);
+	//ordenar
+	selectionsort(vetorupas,n);
+	//imprimir o resultado
+	imprimeResultado(vetorupas, n);
+	//desalocar o vetor
+	vetorupas = desalocaUpas(vetorupas);
+  return 0;
 }
-
-
-//funcao prioridade. função ordena quant. func ordena por ondem alfabetica. funcao imprime 
