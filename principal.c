@@ -6,19 +6,19 @@ int main ()
 {
 	
 	int n;
-	TADupa *vetorupas = NULL;
+	TADupa *vetorupas = NULL;//inicia o vetor
 
-	//ler as quantidades
+	//le as quantidades
 	scanf("%d",&n);
-	//alocar o vetor
+	//aloca o vetor
 	vetorupas = alocaUpas(vetorupas,n);
-	//preencher o vetor
+	//preenche o vetor
 	preencheVetor(vetorupas, n);
-	//ordenar
+	//ordena
 	selectionsort(vetorupas,n);
-	//imprimir o resultado
+	//imprime o resultado
 	imprimeResultado(vetorupas, n);
-	//desalocar o vetor
+	//desaloca o vetor
 	vetorupas = desalocaUpas(vetorupas);
   return 0;
 }
