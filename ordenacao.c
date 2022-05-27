@@ -48,11 +48,17 @@ void selectionsort (TADupa *vet, int tam){ // usando o metodo selection sort ord
                     }
                     else if(vet[j].Upa.SemUrgencia == vet[max].Upa.SemUrgencia)
                     {
-
-                         if(strcmp(vet[max].nome,vet[j].nome )>0){//se todos os casos forem iguais serão ordenados em ordem alfabetica
+						if (vet[j].Upa.QntPlantonistas<vet[max].Upa.QntPlantonistas)
+						{
+							max = j;
+						}
+						
+						else if (vet[j].Upa.QntPlantonistas == vet[max].Upa.QntPlantonistas){
+                         
+						 if(strcmp(vet[max].nome,vet[j].nome )>0){//se todos os casos forem iguais serão ordenados em ordem alfabetica
                              max = j;
                          }
-                        
+						}
                     }
                 }
                 
@@ -67,7 +73,6 @@ void selectionsort (TADupa *vet, int tam){ // usando o metodo selection sort ord
 
 
 void imprimeResultado(TADupa *upas, int n){//Imprime as UPAS ordenadas de acordo com a situação 
-    printf("\n\n");
     for (int i = 0; i < n; i++){
         printf("%s %d %d %d %d\n", upas[i].nome, upas[i].Upa.Emergencia, upas[i].Upa.Urgencia, upas[i].Upa.SemUrgencia, upas[i].Upa.QntPlantonistas);
     }
